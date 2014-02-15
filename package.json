@@ -1,0 +1,17 @@
+{
+    "name": "twitter-engager",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "NODE_ENV=development node ./app.js"
+    },
+    "dependencies": {
+        "mongoose": "*",
+        "mocha": "*",
+        "should": "*",
+        "twitter":"*",
+        "underscore": "*",
+        "mongoose-long": "*",
+        "sinon": "*"
+    }
+}
