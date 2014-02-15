@@ -13,13 +13,13 @@ IncomingMessageSchema = new db.Schema
         updatedAt: { type: Date, 'default': Date.now }
 
 IncomingMessageSchema.statics.findByTwitMsgId = (msgId, callback) ->
-      this.db.model('IncomingMessage').find {twitMsgId: msgId}, callback
+      this.db.model('IncomingMessage').findOne {twitMsgId: msgId}, callback
 
 IncomingMessageSchema.statics.findByTwitMsgIds = (msgIds, callback) ->
     this.db.model('IncomingMessage').find {twitMsgId: { '$in': msgIds}}, callback
 
-IncomingMessageSchema.statics.findLastMsgId = (callback) ->
-      this.db.model('IncomingMessage').findOne({}).sort('twitMsgId', -1).exec(callback)
+IncomingMessageSchema.statics.findLastMsg = (callback) ->
+      this.db.model('IncomingMessage').findOne({}).sort('twitMsgId': -1).exec(callback)
 
 IncomingMessageSchema.pre 'save', (next) ->
       this.meta.updatedAt = undefined

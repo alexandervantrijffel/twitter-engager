@@ -1,8 +1,13 @@
 require "./config"
 {TwitterListener} = require "./twitter_listener"
+dispatcher = require "./lib/dispatcher"
+{MessageHandler} = require "./message_handler"
 
 listener = new TwitterListener()
-#listener.scheduleGetMentions()
+messageHandler = new MessageHandler dispatcher
 
 listener.on 'new_incoming_message', (message) ->
-    console.log 'we received a new message event', message
+    dispatcher.send 'new_incoming_message', message
+
+listener.emitTestEvent()
+#messageHandler.onNewMessage {text: "@bot           bot retweet 1231237612736" }

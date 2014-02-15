@@ -21,15 +21,13 @@ describe 'twitter_listener', ->
         message.twitMsgId.toString().should.be.equal newItem.twitMsgId.toString()
         done()
 
-    listener.processMentions mentionsData, ->
-        findIncomingMessagesStub.called.should.be.true
-        createMessageStub.called.should.be.true
-        insertedMessage = createMessageStub.getCall(0).args[0]
-        insertedMessage.twitMsgId.toString().should.be.equal newItem.twitMsgId.toString()
-        insertedMessage.text.should.be.equal newItem.text
-
-
-
+    listener.processMentions mentionsData
+    findIncomingMessagesStub.calledOnce.should.be.true
+    createMessageStub.calledOnce.should.be.true
+    insertedMessage = createMessageStub.getCall(0).args[0]
+    insertedMessage.twitMsgId.toString().should.be.equal newItem.twitMsgId.toString()
+    insertedMessage.text.should.be.equal newItem.text
+    insertedMessage.msgType.should.be.equal 'T'
 
 newItem =
         twitMsgId: db.mongoose.Types.Long.fromString("427423107360772100")
