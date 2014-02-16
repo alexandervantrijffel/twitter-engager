@@ -12,3 +12,5 @@ module.exports.mongo = {}
 module.exports.mongo.host = process.env.MONGO_HOST || 'localhost'
 module.exports.mongo.db = 'twitter_engager'
 module.exports.mongo.port = '27017'
+module.exports.mongo.username = ''
+module.exports.mongo.password = ''

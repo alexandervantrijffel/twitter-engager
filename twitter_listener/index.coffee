@@ -15,7 +15,7 @@ class TwitterListener extends EventEmitter
                 if !err && data
                     @sinceId = parseFloat(data.twitMsgId.toString())
                     console.log "setting sinceId to",@sinceId
-                    #@scheduleGetMentions()
+                    @scheduleGetMentions()
 
     emitTestEvent: =>
         IncomingMessage.findByTwitMsgId 433324880499453952, (err, dbItem) =>
@@ -36,7 +36,6 @@ class TwitterListener extends EventEmitter
         if !data || data.length == 0
             return console.log "No mentions found"
 
-        #console.log "received data from twitter ", data
         msgIds = _.map data, (item) -> item.id
         maxId = _.max msgIds
         if maxId > @sinceId
