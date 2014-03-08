@@ -12,4 +12,4 @@ messageHandler = new MessageHandler dispatcher
 listener.on 'new_incoming_message', (message) ->
     dispatcher.send 'new_incoming_message', message
 
-listener.emitTestEvent()
+#listener.emitTestEvent()

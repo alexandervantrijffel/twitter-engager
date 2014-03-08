@@ -36,7 +36,7 @@ newItem =
         text: "The DotNetEvents Daily is out! http://t.co/uoSq4Cn4fN Stories via @MHoeijmans @avtnl @JoseCarballosa"
         msgType: "T"
         __v: 0
-        replySent: false
+        processed: false
 
 dbData = [
 
@@ -46,7 +46,7 @@ dbData = [
         text: "Aangemeld! RT @avtnl: Messaging, SOA, CQRS at Distributed Systems Design event in Rotterdam 27-2-2014. http://t.co/Pn3O5ysCqn @dvdstelt"
         msgType: "T"
         __v: 0
-        replySent: false
+        processed: false
     }
     {
         twitMsgId: db.mongoose.Types.Long.fromNumber(433324880499453952)
@@ -54,7 +54,7 @@ dbData = [
         text: "@pjvds @avtnl leuk om weer even bij te praten!"
         msgType: "T"
         __v: 0
-        replySent: false
+        processed: false
     }
     {
         twitMsgId: db.mongoose.Types.Long.fromNumber(433525781193818112)
@@ -62,7 +62,7 @@ dbData = [
         text: "@avtnl @ramonprick Bedankt voor het aanbod! Lijkt me leuk om weer bij te praten. Ik hoef alleen niet meer naar AMS: http://t.co/s1lPZbNsV9"
         msgType: "T"
         __v: 0
-        replySent: false
+        processed: false
     }
 ]
 mentionsData = [

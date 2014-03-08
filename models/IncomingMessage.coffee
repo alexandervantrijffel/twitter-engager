@@ -8,7 +8,7 @@ IncomingMessageSchema = new db.Schema
       text: {type: String, required: true}
       msgType: {type: String, required: true, uppercase: true, 'enum': ['T','DM'] }
       postedAt: {type: Date}
-      replySent: {type: Boolean, default: false}
+      processed: {type: Boolean, default: false}
       meta:
         updatedAt: { type: Date, 'default': Date.now }
 
