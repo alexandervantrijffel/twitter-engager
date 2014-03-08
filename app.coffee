@@ -1,4 +1,6 @@
 require "./config"
+iced = require('iced-coffee-script').iced;
+
 {TwitterListener} = require "./twitter_listener"
 dispatcher = require "./lib/dispatcher"
 {MessageHandler} = require "./message_handler"

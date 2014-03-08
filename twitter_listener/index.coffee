@@ -4,6 +4,7 @@ config = require '../config'
 db = require('../lib/db')
 IncomingMessage = (require '../models/IncomingMessage').IncomingMessage
 _ = require 'underscore'
+iced = require('iced-coffee-script').iced;
 
 TIMESPAN_MINUTE=60000
 
@@ -18,8 +19,8 @@ class TwitterListener extends EventEmitter
                     @scheduleGetMentions()
 
     emitTestEvent: =>
-        IncomingMessage.findByTwitMsgId 433324880499453952, (err, dbItem) =>
-            @emit 'new_incoming_message', dbItem
+        await IncomingMessage.findByTwitMsgId 433324880499453952, defer err, dbItem
+        @emit 'new_incoming_message', dbItem
 
     scheduleGetMentions: =>
         options = {include_entities:false, count: 25}

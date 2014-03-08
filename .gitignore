@@ -3,3 +3,4 @@ config.local.*
 *.js
 *.map
 .idea
+run.sh

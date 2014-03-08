@@ -1,4 +1,4 @@
-This Node.js app listens to TWitter mentions for a configured Twitter account. New mentions are stored in the database by twitter_listener and processed by twitter_handler.
+This Node.js app listens to Twitter mentions for a configured Twitter account. New mentions are stored in the database by twitter_listener and processed by twitter_handler.
 
 The twitter_handler module parses the mention text. If a known command is sent to the account, the twitter_handler fulfills the request. 
 
