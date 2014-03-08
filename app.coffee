@@ -1,3 +1,4 @@
+require 'coffee-script/register'
 require "./config"
 iced = require('iced-coffee-script').iced;
 
@@ -12,4 +13,3 @@ listener.on 'new_incoming_message', (message) ->
     dispatcher.send 'new_incoming_message', message
 
 listener.emitTestEvent()
-#messageHandler.onNewMessage {text: "@bot           bot retweet 1231237612736" }

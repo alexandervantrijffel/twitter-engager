@@ -4,3 +4,4 @@ config.local.*
 *.map
 .idea
 run.sh
+runmocha.sh

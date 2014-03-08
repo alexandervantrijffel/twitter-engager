@@ -5,7 +5,7 @@ MessageHandler = class MessageHandler
     constructor: (dispatcher) ->
         dispatcher.on 'new_incoming_message', this.onNewMessage
         @twit = new twitter config.twitter_settings
-
+        
     onNewMessage: (message) =>
         console.log 'new message event in message_handler', message.text
 
@@ -15,19 +15,25 @@ MessageHandler = class MessageHandler
             this.retweetMessage match[1], message
 
     retweetMessage: (tweetid, message) ->
-        if !tweetid
-            # todo send error reply
-            console.error "invalid retweet request - no tweet id is available in message: ", message.text
-            return @signOffMessage message
+        options = 
+                 in_reply_to_status_id: message.twitMsgId
 
-        console.log 'retweeting message', message
+        if !tweetid
+            console.log 'updating status with options', options
+            return @twit.updateStatus "@#{message.twitFromUserScreenName} retweet command is invalid, please provide the tweet id to be retweeted."
+                            , options, (updateStatusData) =>
+                console.log 'updateStatusData', updateStatusData
+                console.error "invalid retweet request - no tweet id is available in message: ", message.text
+                @signOffMessage message
+            
+        # console.log 'retweeting message', message
         @twit.post "/statuses/retweet/#{tweetid}.json", (err, result) =>
-            #.retweetStatus tweetid
             if err
-                console.log 'received an ERROR!', err
-            console.log "retweeted message,result: ", result
-            # todo send reply
-            signOffMessage message
+                return console.log 'received an ERROR!', err
+            console.log "retweeted message, result: ", result
+            @twit.updateStatus "@#{message.twitFromUserScreenName} retweeted message successfully", options, (updateStatusData) =>
+                console.log 'send tweet reply ', updateStatusData
+            @signOffMessage message
 
     signOffMessage: (message) ->
         message.replySent = true

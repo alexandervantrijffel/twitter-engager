@@ -4,7 +4,6 @@ config = require '../config'
 db = require('../lib/db')
 IncomingMessage = (require '../models/IncomingMessage').IncomingMessage
 _ = require 'underscore'
-iced = require('iced-coffee-script').iced;
 
 TIMESPAN_MINUTE=60000
 
@@ -19,8 +18,8 @@ class TwitterListener extends EventEmitter
                     @scheduleGetMentions()
 
     emitTestEvent: =>
-        await IncomingMessage.findByTwitMsgId 433324880499453952, defer err, dbItem
-        @emit 'new_incoming_message', dbItem
+        IncomingMessage.findByTwitMsgId 442339027929530400, (err, dbItem) =>
+            @emit 'new_incoming_message', dbItem
 
     scheduleGetMentions: =>
         options = {include_entities:false, count: 25}
@@ -53,6 +52,8 @@ class TwitterListener extends EventEmitter
                 newMessages = _.filter data, (twitterItem) ->
                     dbItemFound = _.find messagesFromDb, (dbItem) -> dbItem.twitMsgId.equals(db.mongoose.Types.Long.fromNumber(twitterItem.id))
                     return dbItemFound == undefined
+
+            if newMessages.length > 0 then console.log "processing #{newMessages.length} new messages" 
 
             # insert into the database and emit events
             _.each newMessages, (item) =>

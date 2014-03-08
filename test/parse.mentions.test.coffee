@@ -1,3 +1,4 @@
+require 'coffee-script/register'
 {TwitterListener} = require("../twitter_listener/")
 sinon = require "sinon"
 IncomingMessage = require('../models/IncomingMessage').IncomingMessage
