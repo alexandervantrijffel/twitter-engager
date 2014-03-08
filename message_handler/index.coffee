@@ -12,15 +12,16 @@ MessageHandler = class MessageHandler
         regExp = /\bbot\s*retweet\s*(\d+)?\b/gi
         match = regExp.exec message.text
         if match
-            retweetMessage message
+            this.retweetMessage match[1], message
 
-    retweetMessage: (message) ->
-        if !match[1]
+    retweetMessage: (tweetid, message) ->
+        console.log 'tweetid', tweetid
+        if !tweetid
             # todo send error reply
             console.error "invalid retweet request - no tweet id is available in message: ", message.text
             return @signOffMessage message
 
-        @twit.post "/statuses/retweet/#{match[1]}.json", (result) =>
+        @twit.post "/statuses/retweet/#{tweetid}.json", (result) =>
             #.retweetStatus match[1]
             console.log "retweeted message,result: ", result
             # todo send reply
@@ -29,5 +30,6 @@ MessageHandler = class MessageHandler
     signOffMessage: (message) ->
         message.replySent = true
         message.save()
+        console.log 'saved and replied'
 
 module.exports.MessageHandler = MessageHandler

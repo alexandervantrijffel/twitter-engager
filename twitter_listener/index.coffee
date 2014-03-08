@@ -27,7 +27,7 @@ class TwitterListener extends EventEmitter
         console.log "timeline options",options
         @twit.get '/statuses/mentions_timeline.json', options, (data) =>
             @processMentions(data)
-        setTimeout @scheduleGetMentions, 10000 # 5 * TIMESPAN_MINUTE
+        setTimeout @scheduleGetMentions, 5 * TIMESPAN_MINUTE
 
     processMentions: (data) =>
         if data.statusCode && data.statusCode != 200
